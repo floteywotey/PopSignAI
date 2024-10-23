@@ -71,7 +71,7 @@ public class ball : MonoBehaviour
         setTarget = false;
         newBall = true;
 
-        //TODO: Why is it bottom border +20? Editing doesn't seem to change anything
+        //TODO: Why is it bottom border +20? Editing doesn't seem to change 
         bottomBorder = Camera.main.GetComponent<mainscript>().bottomBorder;
         topBorder = Camera.main.GetComponent<mainscript>().topBorder;
         leftBorder = Camera.main.GetComponent<mainscript>().leftBorder;
@@ -87,6 +87,7 @@ public class ball : MonoBehaviour
 
     void Update()
     {
+        /**
         //Checks if current video is right video for ball
         //If ball has not been launched and target has not been set and no new ball is being swapped in and a current ball exists
         //and the game is currently in "play" mode or "wait for star" mode?
@@ -116,6 +117,7 @@ public class ball : MonoBehaviour
                 //this.sharedVideoManager.shouldChangeVideo = true;
             }
         }
+        **/
 
 
         // If user left clicks screen
@@ -143,7 +145,7 @@ public class ball : MonoBehaviour
                 //If the y position of the click is within 4 units of the bottom of the original lowest row of balls and you have control over the ball
                 if (!mainscript.StopControl)
                 {
-                    if(GameObject.Find("Sign/Shoot").GetComponent<HoldToSign>().isShot)
+                    if(GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().isShot)
                         StopRecordingAndShoot();
                 }
             }
@@ -207,7 +209,11 @@ public class ball : MonoBehaviour
     {
         GameObject ball = gameObject;
         //Get local response result
-        string result = TfLiteManager.Instance.StopRecording();
+        string result = GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().ans;
+        GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().ans = "";
+        GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().inFlight = true;
+
+
 
         signColor.color = new Color32(100, 255, 117, 255);
         signCaptured.SetTrigger("Pulse");

@@ -175,17 +175,18 @@ public class HandsMediaPipe : MonoBehaviour
             {
                 if(!Input.GetMouseButton(0))
                 {
-                    if(shootButton.GetComponent<HoldToSign>().isShot && lockOutTimeLeft <= 0f)
+                    if(shootButton.GetComponent<DetectToShoot>().isShot && lockOutTimeLeft <= 0f)
                     {
                         TfLiteManager.Instance.StartRecording();
                         Debug.Log("Recording Started");
                     }
-                    if(shootButton.GetComponent<HoldToSign>().isShot)
+                    if(shootButton.GetComponent<DetectToShoot>().isShot)
                     {
                         if(lockOutTimeLeft <= 0f)
                         {
                             handInFrame = true;
-                            shootButton.GetComponent<HoldToSign>().isShot = false;
+                            shootButton.GetComponent<DetectToShoot>().isShot = false;
+                            shootButton.GetComponent<DetectToShoot>().inFlight = false;
                         }
 
                     }

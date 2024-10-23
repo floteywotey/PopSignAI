@@ -163,6 +163,7 @@ public class TfLiteManagerHolistic : MonoBehaviour, ITfLiteManager
 		return answer;
 	}
 
+
 	private void Update()
 	{
 		if (isCapturingMediaPipeData)

@@ -35,7 +35,7 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
 	[HideInInspector]
 	public bool isResponseReady = false;
 	[SerializeField]
-	private float threshold = 0.9f;
+	private float threshold = 0.5f;
 	[SerializeField]
 	private Animator gradientAnimation;
 	[SerializeField]
@@ -161,7 +161,7 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
 		var level = (int)PlayerPrefs.GetInt("OpenLevel");
 		for (int i = 0; i < 5; i++)
 		{
-			Debug.Log("Max Probability: " + outputs[0, i]);
+			//Debug.Log("Max Probability: " + outputs[0, i]);
 			Debug.Log("Word: " + TfLiteManager.LABELS[level-1, i]);
 			if (outputs[0, i] > max)
 			{
@@ -170,12 +170,16 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
 
 			}
 		}
+		Debug.Log(answer + " is the answer");
+		Debug.Log(max  + " is the max");
+		Debug.Log(threshold  + " is the threshold");
 
 		//This to help test out the game inside of unity
 		//Holding down different buttons results in specific signs
-#if UNITY_EDITOR
-		answer = OverrideOutputInEditor(answer, level);
-#endif
+//#if UNITY_EDITOR
+		//answer = OverrideOutputInEditor(answer, level);
+
+//#endif
 
 		// Debug.Log("Max Probability " + max);
 		// Debug.Log("results!!!!!!!!!!!!!!!!!! " + answer);
@@ -183,6 +187,7 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
 			return answer;
 		else
 		{
+			Debug.Log("uh oh");
 			Handheld.Vibrate();
 			//gradientAnimation.SetTrigger("FadeTrigger");
 			StartCoroutine(PopInAndOut(tryAgain));
