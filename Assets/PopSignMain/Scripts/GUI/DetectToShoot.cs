@@ -9,12 +9,10 @@ public class DetectToShoot : MonoBehaviour
     public bool isPressed = false;
     public bool inFlight = false;
     public bool entered = false;
+    public bool start = false;
     public string ans;
     [SerializeField] private GameObject hands;
 
-    void Start(){
-        GetComponent<Image>().color = new Color32(97, 97, 97,255);
-    }
 
     // Update is called once per frame
     void Update()
@@ -32,9 +30,10 @@ public class DetectToShoot : MonoBehaviour
             entered = false;
         }
         if (hands.GetComponent<HandsMediaPipe>().handInFrame && !entered) {
+            start = true;
             entered = true;
         }
-        if (isShot && !inFlight && !entered) {
+        if (isShot && !inFlight && !entered && start) {
                 //label.SetText("Shoot");
                 GetComponent<Image>().color = new Color32(170,255,182,255);
                 //170, 255, 182

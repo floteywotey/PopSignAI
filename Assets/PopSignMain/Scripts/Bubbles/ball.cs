@@ -211,6 +211,7 @@ public class ball : MonoBehaviour
         //Get local response result
         string result = GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().ans;
         GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().ans = "";
+        if (result != "") {
         GameObject.Find("Sign/Shoot").GetComponent<DetectToShoot>().inFlight = true;
 
 
@@ -261,8 +262,9 @@ public class ball : MonoBehaviour
         Camera.main.GetComponent<TutorialManager>().BallHit();                
         GameObject.Find("MediaPipeHands").GetComponent<HandsMediaPipe>().lockOutTimeLeft = GameObject.Find("MediaPipeHands").GetComponent<HandsMediaPipe>().lockOutTime;
 
-        TfLiteManager.Instance.StartRecording();
-        TfLiteManager.Instance.StopRecording();                
+        //TfLiteManager.Instance.StartRecording();
+        //TfLiteManager.Instance.StopRecording();    
+        }            
     }
 
     void FixedUpdate()
