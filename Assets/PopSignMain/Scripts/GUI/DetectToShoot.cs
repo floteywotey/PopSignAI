@@ -26,6 +26,7 @@ public class DetectToShoot : MonoBehaviour
                 isShot = true;
             } else {
                 TfLiteManager.Instance.StartRecording();
+                hands.GetComponent<HandsMediaPipe>().handInFrame = true;
             }
             entered = false;
         }
@@ -33,7 +34,7 @@ public class DetectToShoot : MonoBehaviour
             start = true;
             entered = true;
         }
-        if (isShot && !inFlight && !entered && start) {
+        if (isShot && !inFlight && !entered && start && ans != "") {
                 //label.SetText("Shoot");
                 GetComponent<Image>().color = new Color32(170,255,182,255);
                 //170, 255, 182

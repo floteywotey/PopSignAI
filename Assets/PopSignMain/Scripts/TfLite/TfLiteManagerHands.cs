@@ -113,7 +113,6 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
     {
 		outputs = new float[1, 5];
 
-
 		if (allData.Count < maxFrames)
         {
 			var middleData = allData[allData.Count / 2];
@@ -180,14 +179,14 @@ public class TfLiteManagerHands : MonoBehaviour, ITfLiteManager
 		//answer = OverrideOutputInEditor(answer, level);
 
 //#endif
-
+		
 		// Debug.Log("Max Probability " + max);
 		// Debug.Log("results!!!!!!!!!!!!!!!!!! " + answer);
 		if(max >= threshold)
 			return answer;
 		else
 		{
-			Debug.Log("uh oh");
+			
 			Handheld.Vibrate();
 			//gradientAnimation.SetTrigger("FadeTrigger");
 			StartCoroutine(PopInAndOut(tryAgain));
